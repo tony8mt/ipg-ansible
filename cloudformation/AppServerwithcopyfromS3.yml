@@ -193,25 +193,34 @@ Resources:
               httpd: []
           files: 
             /var/www/html/index.html:
+              content: !Join
+                - ''
+                - - |
+                    <html>
+                  - |2
+                      <head>
+                  - |2
+                        <title>List files in /tmp (verifying downloaded file from S3 Bucket)</title>
+                  - |2
+                        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+                  - |2
+                      </head>
+                  - |2
+                    </html>
               mode: '000644'
               owner: root
               group: root
           commands:
             checkfiles:
-              command: echo `ls /tmp` >> /var/www/html/index.html
+              command: echo "List of files - `ls /tmp`" >> /var/www/html/index.html
         httpconfig:
-          commands:
-            configupdate:
-              command: echo "$MAGIC" >> /etc/httpd/conf/httpd.conf
-              env:
-                MAGIC: Listen 443
           services:
             sysvinit:
               httpd:
                 enabled: 'true'
                 ensureRunning: 'true'
                 files:
-                  - /etc/httpd/conf/httpd.conf
+                  - /var/www/html/index.html
   WebServerScaleUpPolicy:
     Type: 'AWS::AutoScaling::ScalingPolicy'
     Properties:
@@ -268,7 +277,7 @@ Resources:
           InstancePort: '80'
           InstanceProtocol: HTTP
       HealthCheck:
-        Target: 'HTTP:80/index.php'
+        Target: 'HTTP:80/index.html'
         HealthyThreshold: '3'
         UnhealthyThreshold: '5'
         Interval: '30'
