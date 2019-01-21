@@ -1,4 +1,4 @@
-#Two Tier with S3 access Infrastructure
+### Two Tier with S3 access Infrastructure
 
 The two tier architecture has an ELB and Apache server. This infrstructure provides High Availability and Scalability. 
 
