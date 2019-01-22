@@ -5,12 +5,12 @@ Script does validation check for valid number of arguments and valid argument
 
 ### Examples:
 
-$ ./thousands_separator.sh 2342312311
+$ ./thousands_separator.sh 2342312311  
 My argument :  2342312311
-Thousand Separated value :
+Thousand Separated value :  
 2,342,312,311
 
-$ ./thousands_separator.sh 2342312311as
+$ ./thousands_separator.sh 2342312311as  
  Invalid argument
 
 
